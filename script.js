@@ -14,6 +14,9 @@ let rock = document.getElementById("rock");
 let scissors = document.getElementById("scissors");
 let paper = document.getElementById("paper");
 
+let resultMessage = document.createElement("div");
+resultMessage.classList.add("result-message");
+document.body.appendChild(resultMessage);
 
 if(localStorage.getItem("scoreAqua")){
     scoreAqua = localStorage.getItem("scoreAqua");
@@ -107,22 +110,22 @@ function result(who){
             scoreAqua++;
             localStorage.setItem("scoreAqua", scoreAqua);
             displayScoreAqua.innerHTML = scoreAqua;
-            console.log("Aqua gagne");
+            resultMessage.innerHTML = `Aqua gagne! Score: Aqua ${scoreAqua} - Player ${scorePlayer}`;
             break;
         case "player":
             scorePlayer++;
             localStorage.setItem("scorePlayer", scorePlayer);
             displayScorePlayer.innerHTML = scorePlayer;
-            console.log("Vous gagnez");
+            resultMessage.innerHTML = `Vous gagnez! Score: Aqua ${scoreAqua} - Player ${scorePlayer}`;
             break;
         default:
-            console.log("Match nul");
+            resultMessage.innerHTML = `Match nul! Score: Aqua ${scoreAqua} - Player ${scorePlayer}`;
             break;
-        
     }
 
     timeOut = setTimeout(()=>{
         aqua.style.removeProperty("background-image");
         aqua.classList.add("shake");
+        resultMessage.innerHTML = "";
     },3000);
 }
